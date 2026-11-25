@@ -2,7 +2,7 @@
 
 La web de **Rastro**, la app de compraventa de segunda mano, hecha con React + TypeScript + Vite, Redux Toolkit (RTK Query), React Router, React Hook Form y Zod.
 
-- **Web publicada (Netlify):** https://rastro-tunombre.netlify.app (pendiente: tu dirección de Netlify)
+- **Web publicada (Netlify):** https://rastro-hector.netlify.app
 - **API (Render):** https://api-rastro.onrender.com/api
 
 ## Cómo arrancarla
