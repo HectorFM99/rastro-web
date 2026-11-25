@@ -1,9 +1,8 @@
+import { RouterProvider } from "react-router";
+import { router } from "./app/router";
+
 function App() {
-  return (
-    <main>
-      <h1>Rastro</h1>
-    </main>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
