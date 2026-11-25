@@ -11,3 +11,13 @@ Porque `searchParams` es estado de React (sale de `useSearchParams`) y el estado
 **`OfferForm` y `OfferList` son hermanos y no se pasan nada. ¿Cómo se entera la lista de que hay una oferta nueva?**
 
 Por la caché de RTK Query y sus tags. `getOffers` dice que da datos con el tag `"Offer"` (`providesTags`) y `createOffer` dice que, cuando termina, ese tag ya no vale (`invalidatesTags: ["Offer"]`). Cuando `OfferForm` crea la oferta, RTK Query marca como caducadas las ofertas guardadas y, como `OfferList` está usando `useGetOffersQuery`, las vuelve a pedir solo. La lista se pinta otra vez con la oferta nueva sin que los dos componentes se hablen.
+
+## Pregunta 3 (Parte 5)
+
+**¿Qué cambia en la ficha? La ficha no recibe el usuario por props: ¿cómo se entera de que ha cambiado? ¿Se vuelve a pedir el anuncio a la API?**
+
+Cambia la columna de la derecha: con Luis Martín (el vendedor del Seat) sale el panel "Tu anuncio" para cambiar el precio o borrarlo; con Ana García sale el formulario "Hacer una oferta". El resto de la ficha es igual.
+
+La ficha se entera porque lee el usuario con `useCurrentUser()`, que usa `useContext`. Cuando el desplegable llama a `changeUser`, cambia el estado de `CurrentUserProvider` y el `value` del contexto, y React vuelve a pintar todos los componentes que leen ese contexto, la ficha incluida, sin pasar nada por props.
+
+No se vuelve a pedir el anuncio: en la pestaña Red no sale ninguna petición nueva a `/listings/:id`. El anuncio ya está en la caché de RTK Query y lo único que ha cambiado es el usuario, que no está en la API.
