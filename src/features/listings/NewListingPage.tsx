@@ -33,14 +33,8 @@ export function NewListingPage() {
   async function onSubmit(data: ListingFormValues) {
     setError(null);
     try {
-      const created = await createListing({
-        ...data,
-        status: "AVAILABLE",
-        views: 0,
-        publishedAt: new Date().toISOString(),
-        seller: user,
-        attributes: {},
-      }).unwrap();
+      // El estado, la fecha, las visitas y el nombre del vendedor los pone la API
+      const created = await createListing({ ...data, sellerId: user.id, attributes: {} }).unwrap();
       navigate(`/listings/${created.id}`);
     } catch (e) {
       setError(getErrorMessage(e));
